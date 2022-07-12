@@ -2,12 +2,12 @@
      <mat-toolbar class="total">
           Total points: {{freightScored*6+parkedState*10}}
      </mat-toolbar>
-     <button style="position: fixed; z-index: 100; top:3vh; right: 3vw;"  mat-raised-button (click)="onPageChange(1)">home</button>
+     <button style="position: fixed; z-index: 100; top:3vh; right: 3vw;"  mat-raised-button (click)="onSave()" (click)="onPageChange(1)">home</button>
 </div>
 
 <p style="margin-top: 10vh;">Freight scored: {{freightScored}} <button mat-raised-button (click)="onFreightChange(1)" >+</button> <button mat-raised-button (click)="onFreightChange(-1)" >-</button></p>
 <p>Parked:<mat-checkbox (change)="onParkedChange()"></mat-checkbox></p>
-
+<p *ngIf="getFreight!=0">freight saved:{{getFreight}}</p>
 <br>
 <br>
 <br>

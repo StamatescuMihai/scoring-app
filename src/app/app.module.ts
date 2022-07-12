@@ -11,6 +11,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FlexLayoutModule,
     MatCheckboxModule,
     MatToolbarModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
   ],
   providers: [
   ],

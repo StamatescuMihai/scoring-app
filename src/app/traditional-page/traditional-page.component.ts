@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageService } from '../page.service';
+import { PageService } from '../services/page.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'traditional-page',
@@ -10,11 +11,12 @@ export class TraditionalPageComponent implements OnInit {
 
   freightScored:number = 0;
   parkedState = 0;
+  getFreight:number = 0;
 
-  constructor() { }
+  constructor(private pageService:PageService,private saveService:StorageService) { }
 
   onPageChange(pageNumber:number){
-    PageService.setCurrentPage(pageNumber);
+    this.pageService.setCurrentPage(pageNumber);
   }
 
   onFreightChange(fr:number){
@@ -26,6 +28,14 @@ export class TraditionalPageComponent implements OnInit {
 
   onParkedChange(){
     this.parkedState=1-this.parkedState;
+  }
+
+  onSave(){
+    this.saveService.set("freight", this.freightScored);
+  }
+
+  async onGet(){
+    this.getFreight=await this.saveService.get("freight");
   }
 
   ngOnInit(): void {

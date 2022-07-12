@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PageService {
-  private static currentPage: number = 1;//1-home, 2-remote, 3-traditional
+  private currentPage: number = 1;//1-home, 2-remote, 3-traditional
   constructor() { }
 
-  static getCurrentPage() {
+  getCurrentPage() {
     return this.currentPage;
   }
 
-  static setCurrentPage(givenPage: number) {
+  setCurrentPage(givenPage: number) {
     this.currentPage = givenPage;
   }
 }

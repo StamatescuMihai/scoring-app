@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageService } from '../page.service';
+import { PageService } from '../services/page.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'remote-page',
@@ -8,10 +9,18 @@ import { PageService } from '../page.service';
 })
 export class RemotePageComponent implements OnInit {
 
-  constructor() { }
+  freight:number=0;
+
+  constructor(private pageService:PageService, private saveService:StorageService) { 
+    this.onGet();
+  }
 
   onPageChange(pageNumber:number){
-    PageService.setCurrentPage(pageNumber);
+    this.pageService.setCurrentPage(pageNumber);
+  }
+
+  async onGet(){
+    this.freight=await this.saveService.get("freight");
   }
 
   ngOnInit(): void {
