@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageService } from './services/page.service';
+import { PageService } from '../services/page.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,9 @@ import { PageService } from './services/page.service';
 export class AppComponent {
   title = 'scoring-app';
 
-  constructor(private pageService:PageService) {}
+  constructor(private pageService: PageService) { }
 
-  getPage(){
+  getPage() {
     return this.pageService.getCurrentPage();
   }
 }

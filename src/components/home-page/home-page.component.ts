@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../app.component';
-import { PageService } from '../services/page.service';
+import { AppComponent } from '../../app/app.component';
+import { PageService } from '../../services/page.service';
 @Component({
   selector: 'home-page',
   templateUrl: './home-page.component.html',
@@ -8,9 +8,9 @@ import { PageService } from '../services/page.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private pageService:PageService) { }
+  constructor(private pageService: PageService) { }
 
-  onPageChange(pageNumber:number){
+  onPageChange(pageNumber: number) {
     this.pageService.setCurrentPage(pageNumber);
   }
 

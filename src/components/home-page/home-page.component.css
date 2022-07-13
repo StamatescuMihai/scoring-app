@@ -7,7 +7,7 @@ button {
     margin: 1em;
     border-radius: 5rem;
     font-size: 5vw;
-    padding:4%;
+    padding: 4%;
 }
 
 .centered {
@@ -17,20 +17,21 @@ button {
     transform: translate(-50%, -50%);
 }
 
-.title{
+.title {
     font-size: 8vw;
     margin-bottom: 5vw;
 }
 
-.button1{
-    padding-left: 15%; 
+.button1 {
+    padding-left: 15%;
     padding-right: 15%;
     padding-top: 5%;
     padding-bottom: 5%;
-    transform: translate(-2vw,0);
+    transform: translate(-2vw, 0);
 }
 
 @media only screen and (min-width: 913px) {
+
     /* For desktops/tablets: */
     button {
         background-color: #85F4FF;
@@ -40,26 +41,26 @@ button {
         margin: 1em;
         border-radius: 5rem;
         font-size: 5vh;
-        padding:4%;
+        padding: 4%;
     }
-    
+
     .centered {
         position: relative;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
     }
-    
-    .title{
+
+    .title {
         font-size: 8vh;
         margin-bottom: 5vh;
     }
 
-    .button1{
-        padding-left: 17%; 
-        padding-right: 17%; 
-        padding-top: 5%; 
+    .button1 {
+        padding-left: 17%;
+        padding-right: 17%;
+        padding-top: 5%;
         padding-bottom: 5%;
-        transform: translate(-2vw,0);
-    } 
+        transform: translate(-2vw, 0);
+    }
 }
