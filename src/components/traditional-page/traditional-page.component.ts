@@ -10,7 +10,14 @@ import { StorageService } from '../../services/storage.service';
 })
 export class TraditionalPageComponent implements OnInit {
 
-  game: GameModel = new GameModel(0, false);
+  game: GameModel = {
+    freightScored: 0,
+    isParked: false
+  };
+  zerogame: GameModel = {
+    freightScored: 0,
+    isParked: false
+  }
 
   constructor(private pageService: PageService, private saveService: StorageService) { }
 
@@ -30,7 +37,21 @@ export class TraditionalPageComponent implements OnInit {
   }
 
   onSave() {
-    this.saveService.set("game", this.game);
+    if (JSON.stringify(this.game)===JSON.stringify(this.zerogame)){
+      return;
+    }
+    this.saveService.get("games")?.then(
+      (response) => {
+        let games: GameModel[] = response;
+        if (games != null) {
+          games.unshift(this.game);
+        }
+        else {
+          games = [this.game];
+        };
+        this.saveService.set("games", games);
+      }
+    )
   }
 
   ngOnInit(): void {

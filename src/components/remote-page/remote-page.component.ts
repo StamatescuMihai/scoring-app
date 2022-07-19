@@ -10,7 +10,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class RemotePageComponent implements OnInit {
 
-  game: GameModel = new GameModel(0, false);
+  games: GameModel[]=[];
 
   constructor(private pageService: PageService, private saveService: StorageService) {
     this.onGet();
@@ -21,7 +21,7 @@ export class RemotePageComponent implements OnInit {
   }
 
   async onGet() {
-    this.game = await this.saveService.get("game");
+    this.games = await this.saveService.get("games");
   }
 
   ngOnInit(): void {

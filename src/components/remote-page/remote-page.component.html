@@ -1,7 +1,11 @@
-<p>remote-page works!</p>
-<button mat-raised-button (click)="onPageChange(1)">home</button>
-<p>Last game: </p>
-<ul>
-    <li>Freight scored: {{game.freightScored}}</li>
-    <li>Parked: {{game.isParked?"Yes":"No"}}</li>
-</ul>
+<ion-content>
+    <button mat-raised-button (click)="onPageChange(1)">home</button>
+    <h1>Game Hisory</h1>
+    <div *ngFor="let game of games; let i=index;">
+        <p>Game number {{games.length-i}}</p>
+        <ul>
+            <li>Freight scored: {{game.freightScored}}</li>
+            <li>Parked: {{game.isParked?"Yes":"No"}}</li>
+        </ul>
+    </div>
+</ion-content>
