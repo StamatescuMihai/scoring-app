@@ -1,0 +1,13 @@
+{
+  "defaultProject": "scoring-app",
+  "projects": {
+    "scoring-app": {
+      "name": "scoring-app",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular",
+      "root": ""
+    }
+  }
+}
