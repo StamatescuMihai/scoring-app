@@ -1,7 +1,7 @@
 <ion-content>
      <div>
           <mat-toolbar class="total">
-               Total points: {{game.freightScored*6+(game.isParked==true?1:0)*10}}
+               Total points: {{this.calcService.total(game)}}
           </mat-toolbar>
           <button style="position: fixed; z-index: 100; top:3vh; right: 3vw;" mat-raised-button (click)="onSave()"
                (click)="onPageChange(1)">home</button>
@@ -12,6 +12,23 @@
                (click)="onFreightChange(-1)">-</button></p>
      <p>Parked:<mat-checkbox (change)="onParkedChange()"></mat-checkbox>
      </p>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
      <br>
      <br>
      <br>

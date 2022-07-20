@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameModel } from 'src/models/game.model';
+import { CalculateService } from 'src/services/calculate.service';
 import { PageService } from '../../services/page.service';
 import { StorageService } from '../../services/storage.service';
 
@@ -12,7 +13,7 @@ export class RemotePageComponent implements OnInit {
 
   games: GameModel[]=[];
 
-  constructor(private pageService: PageService, private saveService: StorageService) {
+  constructor(private pageService: PageService, private saveService: StorageService, public calcService:CalculateService) {
     this.onGet();
   }
 
