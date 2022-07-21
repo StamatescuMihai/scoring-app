@@ -11,18 +11,48 @@ import { StorageService } from '../../services/storage.service';
 })
 export class RemotePageComponent implements OnInit {
 
-  games: GameModel[]=[];
-
-  constructor(private pageService: PageService, private saveService: StorageService, public calcService:CalculateService) {
-    this.onGet();
+  game: GameModel = {
+    freightScored: 0,
+    isParked: false
+  };
+  zerogame: GameModel = {
+    freightScored: 0,
+    isParked: false
   }
+
+  constructor(private pageService: PageService, private saveService: StorageService, public calcService: CalculateService) { }
 
   onPageChange(pageNumber: number) {
     this.pageService.setCurrentPage(pageNumber);
   }
 
-  async onGet() {
-    this.games = await this.saveService.get("games");
+  onFreightChange(fr: number) {
+    this.game.freightScored += fr;
+    if (this.game.freightScored < 0) {
+      this.game.freightScored = 0;
+    }
+  }
+
+  onParkedChange() {
+    this.game.isParked = !this.game.isParked;
+  }
+
+  onSave() {
+    if (JSON.stringify(this.game)===JSON.stringify(this.zerogame)){
+      return;
+    }
+    this.saveService.get("games")?.then(
+      (response) => {
+        let games: GameModel[] = response;
+        if (games != null) {
+          games.unshift(this.game);
+        }
+        else {
+          games = [this.game];
+        };
+        this.saveService.set("games", games);
+      }
+    )
   }
 
   ngOnInit(): void {

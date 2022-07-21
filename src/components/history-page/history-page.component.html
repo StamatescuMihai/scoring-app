@@ -1,0 +1,11 @@
+<ion-content>
+    <button mat-raised-button (click)="onPageChange(1)">home</button>
+    <h1>Game Hisory</h1>
+    <div *ngFor="let game of games; let i=index;">
+        <p>Game number {{games.length-i}} : {{this.calcService.total(game)}} points</p>
+        <ul>
+            <li>Freight scored: {{game.freightScored}}</li>
+            <li>Parked: {{game.isParked?"Yes":"No"}}</li>
+        </ul>
+    </div>
+</ion-content>

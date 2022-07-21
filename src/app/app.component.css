@@ -1,12 +1,9 @@
-.boundingBox {
-    background-color: blueviolet;
-    width: min(100%, 66vh);
-    height: 100%;
-}
-
 .centered {
     position: relative;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -8%);
+    opacity: 30%;
+    height: auto;
+    width: 80vw;
 }

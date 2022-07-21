@@ -13,14 +13,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { StorageService } from '../services/storage.service';
+import { HistoryPageComponent } from '../components/history-page/history-page.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     RemotePageComponent,
-    TraditionalPageComponent
+    TraditionalPageComponent,
+    HistoryPageComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { StorageService } from '../services/storage.service';
     FlexLayoutModule,
     MatCheckboxModule,
     MatToolbarModule,
+    MatIconModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
   ],

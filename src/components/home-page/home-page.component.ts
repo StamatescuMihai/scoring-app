@@ -14,8 +14,6 @@ export class HomePageComponent implements OnInit {
     
   }
 
-  
-
   onPageChange(pageNumber: number) {
     this.pageService.setCurrentPage(pageNumber);
   }

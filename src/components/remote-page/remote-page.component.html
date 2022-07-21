@@ -1,11 +1,66 @@
 <ion-content>
-    <button mat-raised-button (click)="onPageChange(1)">home</button>
-    <h1>Game Hisory</h1>
-    <div *ngFor="let game of games; let i=index;">
-        <p>Game number {{games.length-i}} : {{this.calcService.total(game)}} points</p>
-        <ul>
-            <li>Freight scored: {{game.freightScored}}</li>
-            <li>Parked: {{game.isParked?"Yes":"No"}}</li>
-        </ul>
+    <div>
+         <mat-toolbar class="total">
+              Total points: {{this.calcService.total(game)}}
+         </mat-toolbar>
+         <button style="position: fixed; z-index: 100; top:3vh; right: 3vw;" mat-raised-button (click)="onSave()"
+              (click)="onPageChange(1)">home</button>
     </div>
+
+    <p style="margin-top: 10vh;">Freight scored: {{game.freightScored}} <button mat-raised-button
+              (click)="onFreightChange(1)">+</button> <button mat-raised-button
+              (click)="onFreightChange(-1)">-</button></p>
+    <p>Parked:<mat-checkbox (change)="onParkedChange()"></mat-checkbox>
+    </p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </ion-content>
