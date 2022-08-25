@@ -7,11 +7,18 @@
               (click)="onPageChange(1)">home</button>
     </div>
 
-    <p style="margin-top: 10vh;">Freight scored: {{game.freightScored}} <button mat-raised-button
-              (click)="onFreightChange(1)">+</button> <button mat-raised-button
-              (click)="onFreightChange(-1)">-</button></p>
-    <p>Parked:<mat-checkbox (change)="onParkedChange()"></mat-checkbox>
-    </p>
+    <h2 style="margin-top: 10vh;">Autonomous: {{getAutoPoints()}}</h2>
+     <p>Detection bonus: <mat-checkbox (change)="onAutoDetectionBonus()"></mat-checkbox></p>
+     <p>Objective 1: <mat-checkbox (change)="onObjective1AutoChange()"></mat-checkbox></p>
+     <p>Parked: <mat-checkbox (change)="onParkedAutoChange()"></mat-checkbox></p>
+     <h2>Teleop: {{getTeleopPoints()}}</h2>
+     <p>Elements scored: {{game.robot1.teleop.elementsScored}} <button mat-raised-button
+          (click)="onElementChange(1)">+</button> <button mat-raised-button
+          (click)="onElementChange(-1)">-</button></p>
+     <h2>Endgame: {{getEndgamePoints()}}</h2>
+     <p>Objective 1: <mat-checkbox (change)="onObjective1EndgameChange()"></mat-checkbox></p>
+     <p>Objective 2: <mat-checkbox (change)="onObjective2EndgameChange()"></mat-checkbox></p>
+     <p>Parked: <mat-checkbox (change)="onParkedEndgameChange()"></mat-checkbox></p>
     <br>
     <br>
     <br>

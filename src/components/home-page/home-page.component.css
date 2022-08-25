@@ -17,16 +17,10 @@
 
 .btnhistory{
     background-color: #92D50B;
-    border-style: solid;
-    border-width: 0;
-    border-color: rgb(0, 122, 181);
-    margin: 1em;
-    border-radius: 50%;
-    font-size: 5vw;
-    padding: 4%;
     color: white;
-    width: 15vw;
-    height: 15vw;
+    width: 8vh;
+    height: 8vh;
+    padding: 0;
 }
 
 .font {
@@ -37,6 +31,11 @@
     width: 65vw;
     height: auto;
     transform: translate(0, +8vh);
+}
+
+.mat-icon {
+    vertical-align: middle;
+    transform: scale(2) translate(-0.18vw, -0.08vh);
 }
 
 @media only screen and (min-width: 913px) {

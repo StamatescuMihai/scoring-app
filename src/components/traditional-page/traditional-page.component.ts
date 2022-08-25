@@ -12,13 +12,71 @@ import { StorageService } from '../../services/storage.service';
 export class TraditionalPageComponent implements OnInit {
 
   game: GameModel = {
-    freightScored: 0,
-    isParked: false
+    isRemote: false,
+    robot1 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: false
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:false,
+        objective2: false
+      }
+    },
+    robot2 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: false
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:false,
+        objective2:false
+      }
+    }
   };
   zerogame: GameModel = {
-    freightScored: 0,
-    isParked: false
-  }
+    isRemote: false,
+    robot1 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: false
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:false,
+        objective2: false
+      }
+    },
+    robot2 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: false
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:false,
+        objective2:false
+      }
+    }
+  };
 
   constructor(private pageService: PageService, private saveService: StorageService, public calcService: CalculateService) { }
 
@@ -26,15 +84,62 @@ export class TraditionalPageComponent implements OnInit {
     this.pageService.setCurrentPage(pageNumber);
   }
 
-  onFreightChange(fr: number) {
-    this.game.freightScored += fr;
-    if (this.game.freightScored < 0) {
-      this.game.freightScored = 0;
+  getAutoPoints(){
+    return this.calcService.perAuto(this.game.robot1.auto)+this.calcService.perAuto(this.game.robot2.auto);
+  }
+
+  getTeleopPoints(){
+    return this.calcService.perTeleop(this.game.robot1.teleop)+this.calcService.perTeleop(this.game.robot2.teleop);
+  }
+
+  getEndgamePoints(){
+    return this.calcService.perEndgame(this.game.robot1.endgame)+this.calcService.perEndgame(this.game.robot2.endgame);
+  }
+
+  onElementChange(fr: number) {
+    this.game.robot1.teleop.elementsScored += fr;
+    if (this.game.robot1.teleop.elementsScored < 0) {
+      this.game.robot1.teleop.elementsScored = 0;
     }
   }
 
-  onParkedChange() {
-    this.game.isParked = !this.game.isParked;
+  onParkedAutoChange(robot: number) {
+    if (robot==1){
+      this.game.robot1.auto.parked = !this.game.robot1.auto.parked;
+    }
+    else{
+      this.game.robot2.auto.parked = !this.game.robot2.auto.parked;
+    }
+  }
+
+  onObjective1AutoChange() {
+    this.game.robot1.auto.objective1=!this.game.robot1.auto.objective1;
+  }
+
+  onAutoDetectionBonus(robot:number){
+    if (robot==1){
+      this.game.robot1.auto.autoDetectionBonus=!this.game.robot1.auto.autoDetectionBonus;
+    }
+    else{
+      this.game.robot2.auto.autoDetectionBonus=!this.game.robot2.auto.autoDetectionBonus;
+    }
+  }
+
+  onObjective1EndgameChange(){
+    this.game.robot1.endgame.objective1=!this.game.robot1.endgame.objective1;
+  }
+
+  onObjective2EndgameChange(){
+    this.game.robot1.endgame.objective2=!this.game.robot1.endgame.objective2;
+  }
+
+  onParkedEndgameChange(robot: number) {
+    if (robot==1){
+      this.game.robot1.endgame.parked = !this.game.robot1.endgame.parked;
+    }
+    else{
+      this.game.robot2.endgame.parked = !this.game.robot2.endgame.parked;
+    }
   }
 
   onSave() {

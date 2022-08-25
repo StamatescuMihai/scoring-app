@@ -25,6 +25,11 @@ export class HistoryPageComponent implements OnInit {
     this.games = await this.saveService.get("games");
   }
 
+  async onStorageClear(){
+    await this.saveService.clear();
+    this.games = await this.saveService.get("games");
+  }
+
   ngOnInit(): void {
   }
 

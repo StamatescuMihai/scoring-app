@@ -1,4 +1,7 @@
+import { RobotScoreModel } from "./robotScore.model";
+
 export interface GameModel {
-    freightScored: number;
-    isParked:boolean;   
+    robot1: RobotScoreModel;
+    robot2: RobotScoreModel;
+    isRemote: boolean;
 }

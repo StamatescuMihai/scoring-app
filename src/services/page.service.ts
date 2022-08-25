@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PageService {
-  private currentPage: number = 1;//1-home, 2-remote, 3-traditional
+  private currentPage: number = 1;//1-home, 2-remote, 3-traditional 4-history
   constructor() { }
 
   getCurrentPage() {
