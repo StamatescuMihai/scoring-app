@@ -1,75 +1,35 @@
 <ion-content>
+     <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
      <div>
           <mat-toolbar class="total">
-               Total points: {{this.calcService.total(game)}}
+             <b> <u>Total points: {{this.calcService.total(game)}}</u> </b>
           </mat-toolbar>
-          <button style="position: fixed; z-index: 100; top:3vh; right: 3vw;" mat-raised-button (click)="onSave()"
-               (click)="onPageChange(1)">home</button>
+          <button mat-icon-button class="home" (click)="onSave()" 
+          (click)="onPageChange(1)">
+               <mat-icon>home</mat-icon>
+          </button>
      </div>
-     <h2 style="margin-top: 10vh;">Autonomous: {{getAutoPoints()}}</h2>
-     <p>Robot 1 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(1)"></mat-checkbox></p>
-     <p>Robot 2 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(2)"></mat-checkbox></p>
-     <p>Objective 1: <mat-checkbox (change)="onObjective1AutoChange()"></mat-checkbox></p>
-     <p>Robot 1 Parked: <mat-checkbox (change)="onParkedAutoChange(1)"></mat-checkbox></p>
-     <p>Robot 2 Parked: <mat-checkbox (change)="onParkedAutoChange(2)"></mat-checkbox></p>
-     <h2>Teleop: {{getTeleopPoints()}}</h2>
-     <p>Elements scored: {{game.robot1.teleop.elementsScored}} <button mat-raised-button
-          (click)="onElementChange(1)">+</button> <button mat-raised-button
-          (click)="onElementChange(-1)">-</button></p>
-     <h2>Endgame: {{getEndgamePoints()}}</h2>
-     <p>Objective 1: <mat-checkbox (change)="onObjective1EndgameChange()"></mat-checkbox></p>
-     <p>Objective 2: <mat-checkbox (change)="onObjective2EndgameChange()"></mat-checkbox></p>
-     <p>Robot 1 Parked: <mat-checkbox (change)="onParkedEndgameChange(1)"></mat-checkbox></p>
-     <p>Robot 2 Parked: <mat-checkbox (change)="onParkedEndgameChange(2)"></mat-checkbox></p>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
+     <div style="position:absolute; left:7.5vw; top: 12vh">
+          <div class="auto">
+               <h2>Autonomous: {{getAutoPoints()}}</h2>
+               <p>Robot 1 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(1)"></mat-checkbox></p>
+               <p>Robot 2 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(2)"></mat-checkbox></p>
+               <p>Objective 1: <mat-checkbox (change)="onObjective1AutoChange()"></mat-checkbox></p>
+               <p>Robot 1 Parked: <mat-checkbox (change)="onParkedAutoChange(1)"></mat-checkbox></p>
+               <p>Robot 2 Parked: <mat-checkbox (change)="onParkedAutoChange(2)"></mat-checkbox></p>
+          </div>
+          <div class="teleop">
+               <h2>Teleop: {{getTeleopPoints()}}</h2>
+               <p>Elements scored: {{game.robot1.teleop.elementsScored}} <button mat-mini-fab
+                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button> <button mat-mini-fab
+                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button></p>
+          </div>
+          <div class="endgame">
+               <h2>Endgame: {{getEndgamePoints()}}</h2>
+               <p>Objective 1: <mat-checkbox (change)="onObjective1EndgameChange()"></mat-checkbox></p>
+               <p>Objective 2: <mat-checkbox (change)="onObjective2EndgameChange()"></mat-checkbox></p>
+               <p>Robot 1 Parked: <mat-checkbox (change)="onParkedEndgameChange(1)"></mat-checkbox></p>
+               <p>Robot 2 Parked: <mat-checkbox (change)="onParkedEndgameChange(2)"></mat-checkbox></p>
+          </div>
+     </div>
 </ion-content>
