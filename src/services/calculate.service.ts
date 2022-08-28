@@ -18,7 +18,7 @@ export class CalculateService {
   }
 
   public perAuto(auto: AutoModel):number{
-    return (auto.autoDetectionBonus?20:0)+(auto.objective1?10:0)+(auto.parked?15:0);
+    return (auto.autoDetectionBonus?20:0)+(auto.objective1?10:0)+(auto.parked*10);
   }
 
   public perTeleop(teleop: TeleopModel):number{
@@ -26,6 +26,6 @@ export class CalculateService {
   }
 
   public perEndgame(endgame: EndgameModel):number{
-    return (endgame.objective1?20:0)+(endgame.objective2?20:0)+(endgame.parked?10:0);
+    return (endgame.objective1?20:0)+(endgame.objective2?20:0)+(endgame.parked*10);
   }
 }

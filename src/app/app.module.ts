@@ -15,6 +15,9 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { HistoryPageComponent } from '../components/history-page/history-page.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatRippleModule} from '@angular/material/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatCheckboxModule,
     MatToolbarModule,
     MatIconModule,
+    MatRippleModule,
+    MatButtonToggleModule,
+    FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot()
   ],

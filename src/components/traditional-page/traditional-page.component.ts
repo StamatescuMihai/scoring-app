@@ -17,14 +17,14 @@ export class TraditionalPageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
+        parked:0,
         objective2: false
       }
     },
@@ -32,47 +32,14 @@ export class TraditionalPageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
-        objective2:false
-      }
-    }
-  };
-  zerogame: GameModel = {
-    isRemote: false,
-    robot1 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: false
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:false,
-        objective2: false
-      }
-    },
-    robot2 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: false
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:false,
+        parked:0,
         objective2:false
       }
     }
@@ -103,47 +70,8 @@ export class TraditionalPageComponent implements OnInit {
     }
   }
 
-  onParkedAutoChange(robot: number) {
-    if (robot==1){
-      this.game.robot1.auto.parked = !this.game.robot1.auto.parked;
-    }
-    else{
-      this.game.robot2.auto.parked = !this.game.robot2.auto.parked;
-    }
-  }
-
-  onObjective1AutoChange() {
-    this.game.robot1.auto.objective1=!this.game.robot1.auto.objective1;
-  }
-
-  onAutoDetectionBonus(robot:number){
-    if (robot==1){
-      this.game.robot1.auto.autoDetectionBonus=!this.game.robot1.auto.autoDetectionBonus;
-    }
-    else{
-      this.game.robot2.auto.autoDetectionBonus=!this.game.robot2.auto.autoDetectionBonus;
-    }
-  }
-
-  onObjective1EndgameChange(){
-    this.game.robot1.endgame.objective1=!this.game.robot1.endgame.objective1;
-  }
-
-  onObjective2EndgameChange(){
-    this.game.robot1.endgame.objective2=!this.game.robot1.endgame.objective2;
-  }
-
-  onParkedEndgameChange(robot: number) {
-    if (robot==1){
-      this.game.robot1.endgame.parked = !this.game.robot1.endgame.parked;
-    }
-    else{
-      this.game.robot2.endgame.parked = !this.game.robot2.endgame.parked;
-    }
-  }
-
   onSave() {
-    if (JSON.stringify(this.game)===JSON.stringify(this.zerogame)){
+    if (this.calcService.total(this.game)==0){
       return;
     }
     this.saveService.get("games")?.then(
@@ -156,8 +84,45 @@ export class TraditionalPageComponent implements OnInit {
           games = [this.game];
         };
         this.saveService.set("games", games);
+        this.onReset();
       }
     )
+  }
+
+  onReset(){
+    this.game={
+      isRemote: false,
+    robot1 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: 0
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:0,
+        objective2: false
+      }
+    },
+    robot2 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: 0
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:0,
+        objective2:false
+      }
+    }
+  };
   }
 
   ngOnInit(): void {

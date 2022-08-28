@@ -2,21 +2,42 @@
      <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
      <div>
           <mat-toolbar class="total">
-             <b> <u>Total points: {{this.calcService.total(game)}}</u> </b>
+             <b> <u>Total points: {{this.calcService.total(game)}}</u> </b> 
+             <button mat-icon-button class="btnAfterTotal" (click)="onReset()">
+                  <mat-icon>replay</mat-icon>
+             </button>
+             <button mat-icon-button class="btnAfterTotal" (click)="onSave()">
+               <mat-icon>save</mat-icon>
+          </button>
           </mat-toolbar>
-          <button mat-icon-button class="home" (click)="onSave()" 
-          (click)="onPageChange(1)">
+          <button mat-icon-button class="home" (click)="onPageChange(1)">
                <mat-icon>home</mat-icon>
           </button>
      </div>
-     <div style="position:absolute; left:7.5vw; top: 12vh">
+     <div style="position:absolute; left:7.5vw; top: 12vh; margin-bottom: 5vh;">
           <div class="auto">
                <h2>Autonomous: {{getAutoPoints()}}</h2>
-               <p>Robot 1 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(1)"></mat-checkbox></p>
-               <p>Robot 2 detection bonus: <mat-checkbox (change)="onAutoDetectionBonus(2)"></mat-checkbox></p>
-               <p>Objective 1: <mat-checkbox (change)="onObjective1AutoChange()"></mat-checkbox></p>
-               <p>Robot 1 Parked: <mat-checkbox (change)="onParkedAutoChange(1)"></mat-checkbox></p>
-               <p>Robot 2 Parked: <mat-checkbox (change)="onParkedAutoChange(2)"></mat-checkbox></p>
+               <p>Robot 1 detection bonus: <mat-checkbox [(ngModel)]="game.robot1.auto.autoDetectionBonus"></mat-checkbox></p>
+               <p>Robot 2 detection bonus: <mat-checkbox [(ngModel)]="game.robot2.auto.autoDetectionBonus"></mat-checkbox></p>
+               <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.auto.objective1"></mat-checkbox></p>
+               <section>
+                    <p> Robot 1 Parked:
+                         <mat-button-toggle-group [(ngModel)]="game.robot1.auto.parked">
+                              <mat-button-toggle value="0">No</mat-button-toggle>
+                              <mat-button-toggle value="1">Partial</mat-button-toggle>
+                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                         </mat-button-toggle-group>
+                    </p>
+               </section>
+               <section>
+                    <p> Robot 2 Parked:
+                         <mat-button-toggle-group [(ngModel)]="game.robot2.auto.parked">
+                              <mat-button-toggle value="0">No</mat-button-toggle>
+                              <mat-button-toggle value="1">Partial</mat-button-toggle>
+                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                         </mat-button-toggle-group>
+                    </p>
+               </section>
           </div>
           <div class="teleop">
                <h2>Teleop: {{getTeleopPoints()}}</h2>
@@ -26,10 +47,26 @@
           </div>
           <div class="endgame">
                <h2>Endgame: {{getEndgamePoints()}}</h2>
-               <p>Objective 1: <mat-checkbox (change)="onObjective1EndgameChange()"></mat-checkbox></p>
-               <p>Objective 2: <mat-checkbox (change)="onObjective2EndgameChange()"></mat-checkbox></p>
-               <p>Robot 1 Parked: <mat-checkbox (change)="onParkedEndgameChange(1)"></mat-checkbox></p>
-               <p>Robot 2 Parked: <mat-checkbox (change)="onParkedEndgameChange(2)"></mat-checkbox></p>
+               <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective1"></mat-checkbox></p>
+               <p>Objective 2: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective2"></mat-checkbox></p>
+               <section>
+                    <p> Robot 1 Parked:
+                         <mat-button-toggle-group [(ngModel)]="game.robot1.endgame.parked">
+                              <mat-button-toggle value="0">No</mat-button-toggle>
+                              <mat-button-toggle value="1">Partial</mat-button-toggle>
+                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                         </mat-button-toggle-group>
+                    </p>
+               </section>
+               <section>
+                    <p> Robot 2 Parked:
+                         <mat-button-toggle-group [(ngModel)]="game.robot2.endgame.parked">
+                              <mat-button-toggle value="0">No</mat-button-toggle>
+                              <mat-button-toggle value="1">Partial</mat-button-toggle>
+                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                         </mat-button-toggle-group>
+                    </p>
+               </section>
           </div>
      </div>
 </ion-content>

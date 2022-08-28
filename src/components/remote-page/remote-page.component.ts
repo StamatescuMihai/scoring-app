@@ -18,14 +18,14 @@ export class RemotePageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
+        parked:0,
         objective2: false
       }
     },
@@ -33,14 +33,14 @@ export class RemotePageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
+        parked:0,
         objective2:false
       }
     }
@@ -51,14 +51,14 @@ export class RemotePageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
+        parked:0,
         objective2: false
       }
     },
@@ -66,14 +66,14 @@ export class RemotePageComponent implements OnInit {
       auto:{
         autoDetectionBonus:false,
         objective1:false,
-        parked: false
+        parked: 0
       },
       teleop:{
         elementsScored: 0
       },
       endgame:{
         objective1: false,
-        parked:false,
+        parked:0,
         objective2:false
       }
     }
@@ -100,10 +100,6 @@ export class RemotePageComponent implements OnInit {
     }
   }
 
-  onParkedAutoChange() {
-    this.game.robot1.auto.parked = !this.game.robot1.auto.parked;
-  }
-
   onObjective1AutoChange() {
     this.game.robot1.auto.objective1=!this.game.robot1.auto.objective1;
   }
@@ -120,16 +116,12 @@ export class RemotePageComponent implements OnInit {
     this.game.robot1.endgame.objective2=!this.game.robot1.endgame.objective2;
   }
 
-  onParkedEndgameChange() {
-    this.game.robot1.endgame.parked = !this.game.robot1.endgame.parked;
-  }
-
   onPageChange(pageNumber: number) {
     this.pageService.setCurrentPage(pageNumber);
   }
 
   onSave() {
-    if (JSON.stringify(this.game)===JSON.stringify(this.zerogame)){
+    if (this.calcService.total(this.game)==0){
       return;
     }
     this.saveService.get("games")?.then(
@@ -142,8 +134,45 @@ export class RemotePageComponent implements OnInit {
           games = [this.game];
         };
         this.saveService.set("games", games);
+        this.onReset();
       }
     )
+  }
+
+  onReset(){
+    this.game={
+      isRemote: false,
+    robot1 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: 0
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:0,
+        objective2: false
+      }
+    },
+    robot2 : {
+      auto:{
+        autoDetectionBonus:false,
+        objective1:false,
+        parked: 0
+      },
+      teleop:{
+        elementsScored: 0
+      },
+      endgame:{
+        objective1: false,
+        parked:0,
+        objective2:false
+      }
+    }
+  };
   }
 
   ngOnInit(): void {
