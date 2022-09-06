@@ -21,49 +21,50 @@
                <p>Robot 2 detection bonus: <mat-checkbox [(ngModel)]="game.robot2.auto.autoDetectionBonus"></mat-checkbox></p>
                <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.auto.objective1"></mat-checkbox></p>
                <section>
-                    <p> Robot 1 Parked:
+                    <p> <span style="margin-right: 2vw;">Robot 1 Parked:</span>
                          <mat-button-toggle-group [(ngModel)]="game.robot1.auto.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>
                <section>
-                    <p> Robot 2 Parked:
+                    <p> <span style="margin-right: 2vw;">Robot 2 Parked:</span>
                          <mat-button-toggle-group [(ngModel)]="game.robot2.auto.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>
           </div>
           <div class="teleop">
                <h2>Teleop: {{getTeleopPoints()}}</h2>
-               <p>Elements scored: {{game.robot1.teleop.elementsScored}} <button mat-mini-fab
-                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button> <button mat-mini-fab
-                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button></p>
+               <p>Elements scored: {{game.robot1.teleop.elementsScored}}  <button mat-mini-fab
+                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button>
+                    <button mat-mini-fab
+                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button></p>
           </div>
           <div class="endgame">
                <h2>Endgame: {{getEndgamePoints()}}</h2>
                <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective1"></mat-checkbox></p>
                <p>Objective 2: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective2"></mat-checkbox></p>
                <section>
-                    <p> Robot 1 Parked:
+                    <p> <span style="margin-right: 2vw;">Robot 1 Parked:</span>
                          <mat-button-toggle-group [(ngModel)]="game.robot1.endgame.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>
                <section>
-                    <p> Robot 2 Parked:
+                    <p> <span style="margin-right: 2vw;">Robot 2 Parked:</span>
                          <mat-button-toggle-group [(ngModel)]="game.robot2.endgame.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span> </mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>

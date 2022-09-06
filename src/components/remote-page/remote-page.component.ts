@@ -141,7 +141,7 @@ export class RemotePageComponent implements OnInit {
 
   onReset(){
     this.game={
-      isRemote: false,
+      isRemote: true,
     robot1 : {
       auto:{
         autoDetectionBonus:false,

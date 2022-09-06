@@ -22,18 +22,18 @@
                <section>
                     <p>Parked:
                          <mat-button-toggle-group [(ngModel)]="game.robot1.auto.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>
           </div>
           <div class="teleop">
                <h2>Teleop: {{getTeleopPoints()}}</h2>
-               <p>Elements scored: {{game.robot1.teleop.elementsScored}} <button mat-mini-fab
-                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button> <button mat-mini-fab
-                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button></p>
+               <p>Elements scored: {{game.robot1.teleop.elementsScored}}  <button mat-mini-fab
+                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button></p>
           </div>
           <div class="endgame">
                <h2>Endgame: {{getEndgamePoints()}}</h2>
@@ -42,9 +42,9 @@
                <section>
                     <p>Parked:
                          <mat-button-toggle-group [(ngModel)]="game.robot1.endgame.parked">
-                              <mat-button-toggle value="0">No</mat-button-toggle>
-                              <mat-button-toggle value="1">Partial</mat-button-toggle>
-                              <mat-button-toggle value="1.5">Full</mat-button-toggle>
+                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
+                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
+                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                </section>

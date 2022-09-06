@@ -1,4 +1,14 @@
 <ion-content>
+    <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
+    <mat-toolbar class="history-toolbar">
+        <b> <u>Game History</u> </b> 
+     </mat-toolbar>
+     <button mat-icon-button class="home" (click)="onPageChange(1)">
+          <mat-icon>home</mat-icon>
+     </button>
+     <button mat-icon-button class="clear" (click)="onStorageClear()">
+        <mat-icon>clear</mat-icon>
+    </button>
     <button mat-raised-button (click)="onPageChange(1)">home</button>
     <button mat-raised-button (click)="onStorageClear()">clear</button>
     <h1>Game Hisory</h1>

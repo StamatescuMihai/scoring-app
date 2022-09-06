@@ -2,6 +2,11 @@ p {
     font-size: 2vh;
     width: 100vw;
     height: fit-content;
+    color: white;
+}
+
+h2{
+    color: white;
 }
 
 ::ng-deep .mat-checkbox-ripple .mat-ripple-element {
@@ -16,6 +21,11 @@ p {
     background-color: rgb(100, 145, 10) !important;
 }
 
+::ng-deep .mat-checkbox-frame{
+    border-color: white;
+}
+
+
 .total {
     height: 10vh;
     position: fixed;
@@ -24,6 +34,8 @@ p {
     left: 0;
     z-index: 99;
     text-align: center;
+    background-color: rgb(49, 49, 49);
+    color: white;
 }
 
 .home {
@@ -62,6 +74,7 @@ p {
     border: 4px solid #92D50B;
     border-radius: 25px;
     margin-top: 3vh;
+    margin-bottom: 4vh;
 }
 
 .centered {
@@ -79,4 +92,13 @@ p {
     border: 4px solid #92D50B;
     border-right: 4px solid #92D50B;
     border-radius: 15px;
+}
+.mat-button-toggle{
+    background: rgb(24, 24, 24);
+}
+.mat-button-toggle-checked {
+    background-color: rgb(49, 49, 49);
+  }
+.textColor{
+    color: white;
 }

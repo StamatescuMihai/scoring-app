@@ -1,0 +1,39 @@
+p{
+    color: white;
+}
+h1{
+    color: white;
+}
+.centered {
+    position: relative;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+.home {
+    position: fixed; 
+    z-index: 100; 
+    top:2vh; 
+    right: 5vw; 
+    color: #92D50B; 
+    transform: scale(2);
+}
+.clear {
+    position: fixed; 
+    z-index: 100; 
+    top:2vh; 
+    right: 24vw; 
+    color: #92D50B; 
+    transform: scale(2);
+}
+.history-toolbar {
+    height: 10vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    text-align: center;
+    background-color: rgb(49, 49, 49);
+    color: white;
+}
