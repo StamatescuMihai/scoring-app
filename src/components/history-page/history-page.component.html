@@ -3,14 +3,12 @@
     <mat-toolbar class="history-toolbar">
         <b> <u>Game History</u> </b> 
      </mat-toolbar>
-     <button mat-icon-button class="home" (click)="onPageChange(1)">
+     <button routerLink="/home" mat-icon-button class="home">
           <mat-icon>home</mat-icon>
      </button>
      <button mat-icon-button class="clear" (click)="onStorageClear()">
         <mat-icon>clear</mat-icon>
     </button>
-    <button mat-raised-button (click)="onPageChange(1)">home</button>
-    <button mat-raised-button (click)="onStorageClear()">clear</button>
     <h1>Game Hisory</h1>
     <div *ngFor="let game of games; let i=index;">
         <p>Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points</p>

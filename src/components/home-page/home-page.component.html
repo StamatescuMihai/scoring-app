@@ -12,15 +12,15 @@
             <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
             <div fxLayout="column" fxLayoutAlign="center center">
                 <div>
-                    <button mat-raised-button (click)="onPageChange(3)"
+                    <button routerLink="/traditional" mat-raised-button
                         class="font btncolor"><b>TRADITIONAL</b></button>
                 </div>
                 <div>
-                    <button mat-raised-button (click)="onPageChange(2)"
+                    <button routerLink="/remote" mat-raised-button
                         class="font btncolor"><b>REMOTE</b></button>
                 </div>
                 <div>
-                    <button mat-icon-button (click)="onPageChange(4)"
+                    <button routerLink="/history" mat-icon-button
                         class="btnhistory"><mat-icon>history</mat-icon></button>
                 </div>
             </div>

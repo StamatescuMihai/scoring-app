@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalculateService } from 'src/services/calculate.service';
 import { GameModel } from '../../models/game.model';
-import { PageService } from '../../services/page.service';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -45,11 +44,7 @@ export class TraditionalPageComponent implements OnInit {
     }
   };
 
-  constructor(private pageService: PageService, private saveService: StorageService, public calcService: CalculateService) { }
-
-  onPageChange(pageNumber: number) {
-    this.pageService.setCurrentPage(pageNumber);
-  }
+  constructor(private saveService: StorageService, public calcService: CalculateService) { }
 
   getAutoPoints(){
     return this.calcService.perAuto(this.game.robot1.auto)+this.calcService.perAuto(this.game.robot2.auto);

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameModel } from 'src/models/game.model';
 import { CalculateService } from 'src/services/calculate.service';
-import { PageService } from '../../services/page.service';
 import { StorageService } from '../../services/storage.service';
-import { RobotScoreModel } from 'src/models/robotScore.model';
 
 @Component({
   selector: 'remote-page',
@@ -79,7 +77,7 @@ export class RemotePageComponent implements OnInit {
     }
   };
 
-  constructor(private pageService: PageService, private saveService: StorageService, public calcService: CalculateService) { }
+  constructor(private saveService: StorageService, public calcService: CalculateService) { }
 
   getAutoPoints(){
     return this.calcService.perAuto(this.game.robot1.auto)+this.calcService.perAuto(this.game.robot2.auto);
@@ -114,10 +112,6 @@ export class RemotePageComponent implements OnInit {
 
   onObjective2EndgameChange(){
     this.game.robot1.endgame.objective2=!this.game.robot1.endgame.objective2;
-  }
-
-  onPageChange(pageNumber: number) {
-    this.pageService.setCurrentPage(pageNumber);
   }
 
   onSave() {
