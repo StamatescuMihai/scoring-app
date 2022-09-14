@@ -14,32 +14,48 @@ export class TraditionalPageComponent implements OnInit {
     isRemote: false,
     robot1 : {
       auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
+        parked: 0,
       },
       teleop:{
-        elementsScored: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
       },
       endgame:{
-        objective1: false,
-        parked:0,
-        objective2: false
+        parkedInTerminal:false,
+        junctionsOwnedByCone: 0,
+        junctionsOwnedByBeacon: 0,
+        circuit:false
       }
     },
     robot2 : {
       auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
+        parked: 0,
       },
       teleop:{
-        elementsScored: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
       },
       endgame:{
-        objective1: false,
-        parked:0,
-        objective2:false
+        parkedInTerminal:false,
+        junctionsOwnedByCone: 0,
+        junctionsOwnedByBeacon: 0,
+        circuit:false
       }
     }
   };
@@ -58,10 +74,100 @@ export class TraditionalPageComponent implements OnInit {
     return this.calcService.perEndgame(this.game.robot1.endgame)+this.calcService.perEndgame(this.game.robot2.endgame);
   }
 
-  onElementChange(fr: number) {
-    this.game.robot1.teleop.elementsScored += fr;
-    if (this.game.robot1.teleop.elementsScored < 0) {
-      this.game.robot1.teleop.elementsScored = 0;
+  onTerminalConesAuto(c: number){
+    this.game.robot1.auto.conesInTerminal += c;
+    if (this.game.robot1.auto.conesInTerminal < 0) {
+      this.game.robot1.auto.conesInTerminal = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInTerminal += c;
+    }
+  }
+
+  onGroundConesAuto(c: number){
+    this.game.robot1.auto.conesInGround += c;
+    if (this.game.robot1.auto.conesInGround < 0) {
+      this.game.robot1.auto.conesInGround = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInGround += c;
+    }
+  }
+
+  onLowConesAuto(c: number){
+    this.game.robot1.auto.conesInLow += c;
+    if (this.game.robot1.auto.conesInLow < 0) {
+      this.game.robot1.auto.conesInLow = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInLow += c;
+    }
+  }
+  onMediumConesAuto(c: number){
+    this.game.robot1.auto.conesInMedium += c;
+    if (this.game.robot1.auto.conesInMedium < 0) {
+      this.game.robot1.auto.conesInMedium = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInMedium += c;
+    }
+  }
+  onHighConesAuto(c: number){
+    this.game.robot1.auto.conesInHigh += c;
+    if (this.game.robot1.auto.conesInHigh < 0) {
+      this.game.robot1.auto.conesInHigh = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInHigh += c;
+    }
+  }
+
+  onTerminalCones(c: number){
+    this.game.robot1.teleop.conesInTerminal += c;
+    if (this.game.robot1.teleop.conesInTerminal < 0) {
+      this.game.robot1.teleop.conesInTerminal = 0;
+    }
+  }
+
+  onGroundCones(c: number){
+    this.game.robot1.teleop.conesInGround += c;
+    if (this.game.robot1.teleop.conesInGround < 0) {
+      this.game.robot1.teleop.conesInGround = 0;
+    }
+  }
+
+  onLowCones(c: number){
+    this.game.robot1.teleop.conesInLow += c;
+    if (this.game.robot1.teleop.conesInLow < 0) {
+      this.game.robot1.teleop.conesInLow = 0;
+    }
+  }
+
+  onMediumCones(c: number){
+    this.game.robot1.teleop.conesInMedium += c;
+    if (this.game.robot1.teleop.conesInMedium < 0) {
+      this.game.robot1.teleop.conesInMedium = 0;
+    }
+  }
+
+  onHighCones(c: number){
+    this.game.robot1.teleop.conesInHigh += c;
+    if (this.game.robot1.teleop.conesInHigh < 0) {
+      this.game.robot1.teleop.conesInHigh = 0;
+    }
+  }
+
+  onJunctionsOwnedByCone(j:number){
+    this.game.robot1.endgame.junctionsOwnedByCone += j;
+    if (this.game.robot1.endgame.junctionsOwnedByCone < 0){
+      this.game.robot1.endgame.junctionsOwnedByCone = 0;
+    }
+  }
+
+  onJunctionsOwnedByBeacon(j:number){
+    this.game.robot1.endgame.junctionsOwnedByBeacon += j;
+    if (this.game.robot1.endgame.junctionsOwnedByBeacon < 0){
+      this.game.robot1.endgame.junctionsOwnedByBeacon = 0;
     }
   }
 
@@ -87,37 +193,53 @@ export class TraditionalPageComponent implements OnInit {
   onReset(){
     this.game={
       isRemote: false,
-    robot1 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+      robot1 : {
+        auto:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+          parked: 0,
+        },
+        teleop:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+        },
+        endgame:{
+          parkedInTerminal:false,
+          junctionsOwnedByCone: 0,
+          junctionsOwnedByBeacon: 0,
+          circuit:false
+        }
       },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2: false
+      robot2 : {
+        auto:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+          parked: 0,
+        },
+        teleop:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+        },
+        endgame:{
+          parkedInTerminal:false,
+          junctionsOwnedByCone: 0,
+          junctionsOwnedByBeacon: 0,
+          circuit:false
+        }
       }
-    },
-    robot2 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2:false
-      }
-    }
-  };
+    };
   }
 
   ngOnInit(): void {

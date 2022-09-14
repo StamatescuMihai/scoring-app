@@ -1,5 +1,8 @@
 export interface AutoModel{
-    autoDetectionBonus: boolean;
-    objective1: boolean;
     parked: number;
+    conesInTerminal:number;
+    conesInGround: number;
+    conesInLow: number;
+    conesInMedium: number;
+    conesInHigh: number;
 }

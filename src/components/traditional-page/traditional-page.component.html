@@ -17,56 +17,75 @@
      <div style="position:absolute; left:7.5vw; top: 12vh; margin-bottom: 5vh;">
           <div class="auto">
                <h2>Autonomous: {{getAutoPoints()}}</h2>
-               <p>Robot 1 detection bonus: <mat-checkbox [(ngModel)]="game.robot1.auto.autoDetectionBonus"></mat-checkbox></p>
-               <p>Robot 2 detection bonus: <mat-checkbox [(ngModel)]="game.robot2.auto.autoDetectionBonus"></mat-checkbox></p>
-               <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.auto.objective1"></mat-checkbox></p>
                <section>
-                    <p> <span style="margin-right: 2vw;">Robot 1 Parked:</span>
+                    <p>Parked:
                          <mat-button-toggle-group [(ngModel)]="game.robot1.auto.parked">
                               <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
-                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
-                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
+                              <mat-button-toggle value="2"><span class="textColor">Substation</span></mat-button-toggle>
+                              <mat-button-toggle value="2"><span class="textColor">Terminal</span></mat-button-toggle>
+                              <br><br>
+                              <mat-button-toggle value="10"><span class="textColor">Signal Zone</span></mat-button-toggle>
+                              <mat-button-toggle value="20"><span class="textColor">Signal Zone With Sleeve</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
-               </section>
-               <section>
-                    <p> <span style="margin-right: 2vw;">Robot 2 Parked:</span>
-                         <mat-button-toggle-group [(ngModel)]="game.robot2.auto.parked">
-                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
-                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
-                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
-                         </mat-button-toggle-group>
+                    <p>Cones in terminal: {{game.robot1.auto.conesInTerminal}}  <button mat-mini-fab
+                         (click)="onTerminalConesAuto(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onTerminalConesAuto(1)" class="minifab"><mat-icon>add</mat-icon></button>
+                    </p>
+                    <p>Cones in ground junction: {{game.robot1.auto.conesInGround}}  <button mat-mini-fab
+                         (click)="onGroundConesAuto(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onGroundConesAuto(1)" class="minifab"><mat-icon>add</mat-icon></button>
+                    </p>
+                    <p>Cones in low junction: {{game.robot1.auto.conesInLow}}  <button mat-mini-fab
+                         (click)="onLowConesAuto(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onLowConesAuto(1)" class="minifab"><mat-icon>add</mat-icon></button>
+                    </p>
+                    <p>Cones in medium junction: {{game.robot1.auto.conesInMedium}}  <button mat-mini-fab
+                         (click)="onMediumConesAuto(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onMediumConesAuto(1)" class="minifab"><mat-icon>add</mat-icon></button>
+                    </p>
+                    <p>Cones in high junction: {{game.robot1.auto.conesInHigh}}  <button mat-mini-fab
+                         (click)="onHighConesAuto(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onHighConesAuto(1)" class="minifab"><mat-icon>add</mat-icon></button>
                     </p>
                </section>
           </div>
           <div class="teleop">
                <h2>Teleop: {{getTeleopPoints()}}</h2>
-               <p>Elements scored: {{game.robot1.teleop.elementsScored}}  <button mat-mini-fab
-                    (click)="onElementChange(-1)" class="minifab"><mat-icon>remove</mat-icon></button>
-                    <button mat-mini-fab
-                    (click)="onElementChange(1)" class="minifab"><mat-icon>add</mat-icon></button></p>
+               <p>Cones in terminal: {{game.robot1.teleop.conesInTerminal}}  <button mat-mini-fab
+                    (click)="onTerminalCones(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onTerminalCones(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
+               <p>Cones in ground gunction: {{game.robot1.teleop.conesInGround}}  <button mat-mini-fab
+                    (click)="onGroundCones(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onGroundCones(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
+               <p>Cones in low junction: {{game.robot1.teleop.conesInLow}}  <button mat-mini-fab
+                    (click)="onLowCones(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onLowCones(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
+               <p>Cones in medium junction: {{game.robot1.teleop.conesInMedium}}  <button mat-mini-fab
+                    (click)="onMediumCones(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onMediumCones(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
+               <p>Cones in high junction: {{game.robot1.teleop.conesInHigh}}  <button mat-mini-fab
+                    (click)="onHighCones(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onHighCones(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
           </div>
           <div class="endgame">
                <h2>Endgame: {{getEndgamePoints()}}</h2>
-               <p>Objective 1: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective1"></mat-checkbox></p>
-               <p>Objective 2: <mat-checkbox [(ngModel)]="game.robot1.endgame.objective2"></mat-checkbox></p>
                <section>
-                    <p> <span style="margin-right: 2vw;">Robot 1 Parked:</span>
-                         <mat-button-toggle-group [(ngModel)]="game.robot1.endgame.parked">
-                              <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
-                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
-                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
-                         </mat-button-toggle-group>
+                    <p>Junctions owned by top cone: {{game.robot1.endgame.junctionsOwnedByCone}}  <button mat-mini-fab
+                         (click)="onJunctionsOwnedByCone(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onJunctionsOwnedByCone(1)" class="minifab"><mat-icon>add</mat-icon></button>
                     </p>
-               </section>
-               <section>
-                    <p> <span style="margin-right: 2vw;">Robot 2 Parked:</span>
-                         <mat-button-toggle-group [(ngModel)]="game.robot2.endgame.parked">
-                              <mat-button-toggle value="0"><span class="textColor">No</span> </mat-button-toggle>
-                              <mat-button-toggle value="1"><span class="textColor">Partial</span></mat-button-toggle>
-                              <mat-button-toggle value="1.5"><span class="textColor">Full</span></mat-button-toggle>
-                         </mat-button-toggle-group>
+                    <p>Junctions owned by capped beacon: {{game.robot1.endgame.junctionsOwnedByBeacon}}  <button mat-mini-fab
+                         (click)="onJunctionsOwnedByBeacon(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                         (click)="onJunctionsOwnedByBeacon(1)" class="minifab"><mat-icon>add</mat-icon></button>
                     </p>
+                    <p>Circuit completed: <mat-checkbox [(ngModel)]="game.robot1.endgame.circuit"></mat-checkbox></p>
+                    <p>Parked in terminal: <mat-checkbox [(ngModel)]="game.robot1.endgame.parkedInTerminal"></mat-checkbox></p>
                </section>
           </div>
      </div>

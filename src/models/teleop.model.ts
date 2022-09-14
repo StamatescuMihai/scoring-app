@@ -1,3 +1,7 @@
 export interface TeleopModel{
-    elementsScored: number;
+    conesInTerminal:number;
+    conesInGround: number;
+    conesInLow: number;
+    conesInMedium: number;
+    conesInHigh: number;
 }

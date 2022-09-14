@@ -9,8 +9,9 @@
      <button mat-icon-button class="clear" (click)="onStorageClear()">
         <mat-icon>clear</mat-icon>
     </button>
-    <h1>Game Hisory</h1>
-    <div *ngFor="let game of games; let i=index;">
-        <p>Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points</p>
+    <div style="position:relative; top: 12vh;">
+        <div *ngFor="let game of games; let i=index;">
+            <p>Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points</p>
+        </div>
     </div>
 </ion-content>

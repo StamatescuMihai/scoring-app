@@ -14,104 +14,162 @@ export class RemotePageComponent implements OnInit {
     isRemote: true,
     robot1 : {
       auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
+        parked: 0,
       },
       teleop:{
-        elementsScored: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
       },
       endgame:{
-        objective1: false,
-        parked:0,
-        objective2: false
+        parkedInTerminal:false,
+        junctionsOwnedByCone: 0,
+        junctionsOwnedByBeacon: 0,
+        circuit:false
       }
     },
     robot2 : {
       auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
+        parked: 0,
       },
       teleop:{
-        elementsScored: 0
+        conesInTerminal:0,
+        conesInGround:0,
+        conesInLow: 0,
+        conesInMedium: 0,
+        conesInHigh: 0,
       },
       endgame:{
-        objective1: false,
-        parked:0,
-        objective2:false
-      }
-    }
-  };
-  zerogame: GameModel = {
-    isRemote: true,
-    robot1 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2: false
-      }
-    },
-    robot2 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2:false
+        parkedInTerminal:false,
+        junctionsOwnedByCone: 0,
+        junctionsOwnedByBeacon: 0,
+        circuit:false
       }
     }
   };
 
   constructor(private saveService: StorageService, public calcService: CalculateService) { }
 
-  getAutoPoints(){
-    return this.calcService.perAuto(this.game.robot1.auto)+this.calcService.perAuto(this.game.robot2.auto);
+  getAutoPoints():number{
+    return this.calcService.perAuto(this.game.robot1.auto);
   }
 
   getTeleopPoints(){
-    return this.calcService.perTeleop(this.game.robot1.teleop)+this.calcService.perTeleop(this.game.robot2.teleop);
+    return this.calcService.perTeleop(this.game.robot1.teleop);
   }
 
   getEndgamePoints(){
-    return this.calcService.perEndgame(this.game.robot1.endgame)+this.calcService.perEndgame(this.game.robot2.endgame);
+    return this.calcService.perEndgame(this.game.robot1.endgame);
   }
+  
 
-  onElementChange(fr: number) {
-    this.game.robot1.teleop.elementsScored += fr;
-    if (this.game.robot1.teleop.elementsScored < 0) {
-      this.game.robot1.teleop.elementsScored = 0;
+  onTerminalConesAuto(c: number){
+    this.game.robot1.auto.conesInTerminal += c;
+    if (this.game.robot1.auto.conesInTerminal < 0) {
+      this.game.robot1.auto.conesInTerminal = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInTerminal += c;
     }
   }
 
-  onObjective1AutoChange() {
-    this.game.robot1.auto.objective1=!this.game.robot1.auto.objective1;
+  onGroundConesAuto(c: number){
+    this.game.robot1.auto.conesInGround += c;
+    if (this.game.robot1.auto.conesInGround < 0) {
+      this.game.robot1.auto.conesInGround = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInGround += c;
+    }
   }
 
-  onAutoDetectionBonus(){
-    this.game.robot1.auto.autoDetectionBonus=!this.game.robot1.auto.autoDetectionBonus;
+  onLowConesAuto(c: number){
+    this.game.robot1.auto.conesInLow += c;
+    if (this.game.robot1.auto.conesInLow < 0) {
+      this.game.robot1.auto.conesInLow = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInLow += c;
+    }
+  }
+  onMediumConesAuto(c: number){
+    this.game.robot1.auto.conesInMedium += c;
+    if (this.game.robot1.auto.conesInMedium < 0) {
+      this.game.robot1.auto.conesInMedium = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInMedium += c;
+    }
+  }
+  onHighConesAuto(c: number){
+    this.game.robot1.auto.conesInHigh += c;
+    if (this.game.robot1.auto.conesInHigh < 0) {
+      this.game.robot1.auto.conesInHigh = 0;
+    }
+    else{
+      this.game.robot1.teleop.conesInHigh += c;
+    }
   }
 
-  onObjective1EndgameChange(){
-    this.game.robot1.endgame.objective1=!this.game.robot1.endgame.objective1;
+  onTerminalCones(c: number){
+    this.game.robot1.teleop.conesInTerminal += c;
+    if (this.game.robot1.teleop.conesInTerminal < 0) {
+      this.game.robot1.teleop.conesInTerminal = 0;
+    }
   }
 
-  onObjective2EndgameChange(){
-    this.game.robot1.endgame.objective2=!this.game.robot1.endgame.objective2;
+  onGroundCones(c: number){
+    this.game.robot1.teleop.conesInGround += c;
+    if (this.game.robot1.teleop.conesInGround < 0) {
+      this.game.robot1.teleop.conesInGround = 0;
+    }
+  }
+
+  onLowCones(c: number){
+    this.game.robot1.teleop.conesInLow += c;
+    if (this.game.robot1.teleop.conesInLow < 0) {
+      this.game.robot1.teleop.conesInLow = 0;
+    }
+  }
+
+  onMediumCones(c: number){
+    this.game.robot1.teleop.conesInMedium += c;
+    if (this.game.robot1.teleop.conesInMedium < 0) {
+      this.game.robot1.teleop.conesInMedium = 0;
+    }
+  }
+
+  onHighCones(c: number){
+    this.game.robot1.teleop.conesInHigh += c;
+    if (this.game.robot1.teleop.conesInHigh < 0) {
+      this.game.robot1.teleop.conesInHigh = 0;
+    }
+  }
+
+  onJunctionsOwnedByCone(j:number){
+    this.game.robot1.endgame.junctionsOwnedByCone += j;
+    if (this.game.robot1.endgame.junctionsOwnedByCone < 0){
+      this.game.robot1.endgame.junctionsOwnedByCone = 0;
+    }
+  }
+
+  onJunctionsOwnedByBeacon(j:number){
+    this.game.robot1.endgame.junctionsOwnedByBeacon += j;
+    if (this.game.robot1.endgame.junctionsOwnedByBeacon < 0){
+      this.game.robot1.endgame.junctionsOwnedByBeacon = 0;
+    }
   }
 
   onSave() {
@@ -134,39 +192,55 @@ export class RemotePageComponent implements OnInit {
   }
 
   onReset(){
-    this.game={
+    this.game = {
       isRemote: true,
-    robot1 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
+      robot1 : {
+        auto:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+          parked: 0,
+        },
+        teleop:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+        },
+        endgame:{
+          parkedInTerminal:false,
+          junctionsOwnedByCone: 0,
+          junctionsOwnedByBeacon: 0,
+          circuit:false
+        }
       },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2: false
+      robot2 : {
+        auto:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+          parked: 0,
+        },
+        teleop:{
+          conesInTerminal:0,
+          conesInGround:0,
+          conesInLow: 0,
+          conesInMedium: 0,
+          conesInHigh: 0,
+        },
+        endgame:{
+          parkedInTerminal:false,
+          junctionsOwnedByCone: 0,
+          junctionsOwnedByBeacon: 0,
+          circuit:false
+        }
       }
-    },
-    robot2 : {
-      auto:{
-        autoDetectionBonus:false,
-        objective1:false,
-        parked: 0
-      },
-      teleop:{
-        elementsScored: 0
-      },
-      endgame:{
-        objective1: false,
-        parked:0,
-        objective2:false
-      }
-    }
-  };
+    };
   }
 
   ngOnInit(): void {
