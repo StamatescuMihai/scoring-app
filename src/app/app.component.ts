@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { StorageService } from 'src/services/storage.service';
 import { App as CapacitorApp}  from '@capacitor/app';
 import {MatDialog} from '@angular/material/dialog';
-import { ExitAppDialogComponent } from 'src/components/exit-app-dialog/exit-app-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +13,22 @@ import { ExitAppDialogComponent } from 'src/components/exit-app-dialog/exit-app-
 })
 export class AppComponent {
   title = 'scoring-app';
+  firstTime:number=0;
 
-  constructor(private storageService:StorageService, private platform:Platform, private dialog: MatDialog) {
+  constructor(private storageService:StorageService, private platform:Platform, private dialog: MatDialog, private _snackBar:MatSnackBar, private router:Router, private zone:NgZone) {
     CapacitorApp.addListener('backButton', ({canGoBack}) => {
-      if(!canGoBack){
-        let dialogRef = this.dialog.open(ExitAppDialogComponent, {
-          width: '80vw',
-          height: '30vh'
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          if(result){
-            CapacitorApp.exitApp();
-          }
-        });
+      if(this.router.url=='/home'){
+        if (Date.now()-this.firstTime<3000){
+          CapacitorApp.exitApp();
+        }
+        else{
+          this.firstTime=Date.now();
+          this.zone.run(()=>{
+            this._snackBar.openFromComponent(SnackBarComponent, {
+              duration: 3000,
+            });
+          })
+        }
       } else {
         window.history.back();
       }
@@ -37,3 +41,21 @@ export class AppComponent {
     const resp=this.storageService.get("games");
   }
 }
+
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  template: `
+  <span>
+    Press again to exit app
+  </span>`,
+  styles: [
+    `
+    .mat-simple-snackbar span {
+      margin: auto;
+      text-align: center;
+    }
+  `,
+  ],
+})
+export class SnackBarComponent {}

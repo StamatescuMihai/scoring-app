@@ -20,6 +20,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
   ],
