@@ -77,49 +77,54 @@ export class RemotePageComponent implements OnInit {
 
   onTerminalConesAuto(c: number){
     this.game.robot1.auto.conesInTerminal += c;
+    this.game.robot1.teleop.conesInTerminal += c;
     if (this.game.robot1.auto.conesInTerminal < 0) {
       this.game.robot1.auto.conesInTerminal = 0;
     }
-    else{
-      this.game.robot1.teleop.conesInTerminal += c;
+    if (this.game.robot1.teleop.conesInTerminal < 0) {
+      this.game.robot1.teleop.conesInTerminal = 0;
     }
   }
 
   onGroundConesAuto(c: number){
     this.game.robot1.auto.conesInGround += c;
+    this.game.robot1.teleop.conesInGround += c;
     if (this.game.robot1.auto.conesInGround < 0) {
       this.game.robot1.auto.conesInGround = 0;
     }
-    else{
-      this.game.robot1.teleop.conesInGround += c;
+    if (this.game.robot1.teleop.conesInGround < 0) {
+      this.game.robot1.teleop.conesInGround = 0;
     }
   }
 
   onLowConesAuto(c: number){
     this.game.robot1.auto.conesInLow += c;
+    this.game.robot1.teleop.conesInLow += c;
     if (this.game.robot1.auto.conesInLow < 0) {
       this.game.robot1.auto.conesInLow = 0;
     }
-    else{
-      this.game.robot1.teleop.conesInLow += c;
+    if (this.game.robot1.teleop.conesInLow < 0) {
+      this.game.robot1.teleop.conesInLow = 0;
     }
   }
   onMediumConesAuto(c: number){
     this.game.robot1.auto.conesInMedium += c;
+    this.game.robot1.teleop.conesInMedium += c;
     if (this.game.robot1.auto.conesInMedium < 0) {
       this.game.robot1.auto.conesInMedium = 0;
     }
-    else{
-      this.game.robot1.teleop.conesInMedium += c;
+    if (this.game.robot1.teleop.conesInMedium < 0) {
+      this.game.robot1.teleop.conesInMedium = 0;
     }
   }
   onHighConesAuto(c: number){
     this.game.robot1.auto.conesInHigh += c;
+    this.game.robot1.teleop.conesInHigh += c;
     if (this.game.robot1.auto.conesInHigh < 0) {
       this.game.robot1.auto.conesInHigh = 0;
     }
-    else{
-      this.game.robot1.teleop.conesInHigh += c;
+    if (this.game.robot1.teleop.conesInHigh < 0) {
+      this.game.robot1.teleop.conesInHigh = 0;
     }
   }
 

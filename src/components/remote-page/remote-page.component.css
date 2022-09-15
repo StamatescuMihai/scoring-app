@@ -97,8 +97,18 @@ h2{
     background: rgb(24, 24, 24);
 }
 .mat-button-toggle-checked {
-    background-color: rgb(49, 49, 49);
+    background-color: rgb(65, 65, 65);
   }
 .textColor{
     color: white;
+}
+.mat-divider{
+    margin-bottom: 12px;
+    margin-top: 0;
+    position: relative;
+    height: 4px;
+    width: 84vw;
+    border-width: 4px;
+    border-top-color: #92D50B;
+    transform: translate(-4vw, 0);
 }

@@ -26,6 +26,6 @@ export class CalculateService {
   }
 
   public perEndgame(endgame: EndgameModel):number{
-    return (endgame.circuit?20:0)+endgame.junctionsOwnedByCone*3+endgame.junctionsOwnedByBeacon*10+(endgame.parkedInTerminal?20:0);
+    return (endgame.circuit?20:0)+endgame.junctionsOwnedByCone*3+endgame.junctionsOwnedByBeacon*10+(endgame.parkedInTerminal?2:0);
   }
 }
