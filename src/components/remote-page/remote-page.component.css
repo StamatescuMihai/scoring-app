@@ -74,6 +74,14 @@ h2{
     border: 4px solid #92D50B;
     border-radius: 25px;
     margin-top: 3vh;
+}
+
+.penalties{
+    width: 85vw;
+    padding: 3vw;
+    border: 4px solid #92D50B;
+    border-radius: 25px;
+    margin-top: 3vh;
     margin-bottom: 4vh;
 }
 

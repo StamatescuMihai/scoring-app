@@ -10,7 +10,7 @@ import { TeleopModel } from 'src/models/teleop.model';
 })
 export class CalculateService {
   public total(game: GameModel){
-    return this.perRobot(game.robot1)+this.perRobot(game.robot2);
+    return this.normalizePositive(this.perRobot(game.robot1)+this.perRobot(game.robot2)-game.majors*30-game.minors*10);
   }
 
   public perRobot(robot: RobotScoreModel):number{
@@ -18,7 +18,7 @@ export class CalculateService {
   }
 
   public perAuto(auto: AutoModel):number{
-    return 1*auto.parked+1*auto.conesInTerminal+2*auto.conesInGround+3*auto.conesInLow+4*auto.conesInMedium+5*auto.conesInHigh;
+    return 1*Math.trunc(auto.parked)+1*auto.conesInTerminal+2*auto.conesInGround+3*auto.conesInLow+4*auto.conesInMedium+5*auto.conesInHigh;
   }
 
   public perTeleop(teleop: TeleopModel):number{
@@ -27,5 +27,12 @@ export class CalculateService {
 
   public perEndgame(endgame: EndgameModel):number{
     return (endgame.circuit?20:0)+endgame.junctionsOwnedByCone*3+endgame.junctionsOwnedByBeacon*10+(endgame.parkedInTerminal?2:0);
+  }
+
+  private normalizePositive (x:number):number{
+    if (x<0){
+      x=0;
+    }
+    return x;
   }
 }

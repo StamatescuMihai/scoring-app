@@ -23,7 +23,7 @@
                          <mat-button-toggle-group [(ngModel)]="game.robot1.auto.parked">
                               <mat-button-toggle value="0"><span class="textColor">No</span></mat-button-toggle>
                               <mat-button-toggle value="2"><span class="textColor">Substation</span></mat-button-toggle>
-                              <mat-button-toggle value="2"><span class="textColor">Terminal</span></mat-button-toggle>
+                              <mat-button-toggle value="2.5"><span class="textColor">Terminal</span></mat-button-toggle>
                          </mat-button-toggle-group>
                     </p>
                     <p>Parked in signal zone: <br>
@@ -96,6 +96,18 @@
                          (click)="onJunctionsOwnedByBeacon(1)" class="minifab"><mat-icon>add</mat-icon></button>
                     </p>
                </section>
+          </div>
+          <div class="penalties">
+               <h2>Penalties: {{-getPenaltyPoints()}}</h2>
+               <mat-divider></mat-divider>
+               <p>Minor penalties: {{game.minors}}  <button mat-mini-fab
+                    (click)="onMinor(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onMinor(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
+               <p>Major penalties: {{game.majors}}  <button mat-mini-fab
+                    (click)="onMajor(-1)" class="minifab"><mat-icon>remove</mat-icon></button><button mat-mini-fab
+                    (click)="onMajor(1)" class="minifab"><mat-icon>add</mat-icon></button>
+               </p>
           </div>
      </div>
 </ion-content>

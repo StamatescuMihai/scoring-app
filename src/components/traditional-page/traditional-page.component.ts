@@ -12,6 +12,8 @@ export class TraditionalPageComponent implements OnInit {
 
   game: GameModel = {
     isRemote: false,
+    minors: 0,
+    majors: 0,
     robot1 : {
       auto:{
         conesInTerminal:0,
@@ -72,6 +74,10 @@ export class TraditionalPageComponent implements OnInit {
 
   getEndgamePoints(){
     return this.calcService.perEndgame(this.game.robot1.endgame)+this.calcService.perEndgame(this.game.robot2.endgame);
+  }
+
+  getPenaltyPoints(){
+    return this.game.majors*30+this.game.minors*10;
   }
 
   onTerminalConesAuto(c: number){
@@ -175,6 +181,21 @@ export class TraditionalPageComponent implements OnInit {
       this.game.robot1.endgame.junctionsOwnedByBeacon = 0;
     }
   }
+
+  onMinor(p: number){
+    this.game.minors+= p;
+    if (this.game.minors < 0) {
+      this.game.minors = 0;
+    }
+  }
+
+  onMajor(p: number){
+    this.game.majors+= p;
+    if (this.game.majors < 0) {
+      this.game.majors = 0;
+    }
+  }
+
   onSave() {
     if (this.calcService.total(this.game)==0){
       return;
@@ -197,6 +218,8 @@ export class TraditionalPageComponent implements OnInit {
   onReset(){
     this.game={
       isRemote: false,
+      minors: 0,
+      majors: 0,
       robot1 : {
         auto:{
           conesInTerminal:0,

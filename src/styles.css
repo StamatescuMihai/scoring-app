@@ -6,3 +6,4 @@ body {font-family: Roboto, "Helvetica Neue", sans-serif;}
     font-family: "montserrat-bold";
     src: local("montserrat-bold"), url(./assets/fonts/Montserrat-Bold.ttf) format("truetype");
 }
+.mat-expansion-indicator::after { color: #fff !important;}

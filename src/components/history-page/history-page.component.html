@@ -11,7 +11,102 @@
     </button>
     <div style="position:relative; top: 12vh;">
         <div *ngFor="let game of games; let i=index;">
-            <p>Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points</p>
+            <div>
+                <mat-expansion-panel class="game">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngIf="!game.isRemote">
+                        <p>Autonomous: {{getAutoPoints(game)}} points</p>
+                        <p>&emsp;Robot 1 parked:
+                            <span *ngIf="game.robot1.auto.parked==0">No</span>
+                            <span *ngIf="game.robot1.auto.parked==2">Substation</span>
+                            <span *ngIf="game.robot1.auto.parked==2.5">Terminal</span>
+                            <span *ngIf="game.robot1.auto.parked==10">Signal zone, no bonus</span>
+                            <span *ngIf="game.robot1.auto.parked==20">Signal zone, sleeve bonus</span>
+                        </p>
+                        <p>&emsp;Robot 2 parked:
+                            <span *ngIf="game.robot2.auto.parked==0">No</span>
+                            <span *ngIf="game.robot2.auto.parked==2">Substation</span>
+                            <span *ngIf="game.robot2.auto.parked==2.5">Terminal</span>
+                            <span *ngIf="game.robot2.auto.parked==10">Signal zone, no bonus</span>
+                            <span *ngIf="game.robot2.auto.parked==20">Signal zone, sleeve bonus</span>
+                        </p>
+                        <p>&emsp;Cones scored:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.auto.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.auto.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.auto.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.auto.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.auto.conesInHigh}}</p>
+                        <p>Teleop: {{getTeleopPoints(game)}} points</p>
+                        <p>&emsp;Cones scored:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.teleop.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.teleop.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.teleop.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.teleop.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.teleop.conesInHigh}}</p>
+                        <p>Endgame: {{getEndgamePoints(game)}} points</p>
+                        <p>&emsp;Circuit completed: 
+                            <span *ngIf="game.robot1.endgame.circuit">Yes</span>
+                            <span *ngIf="!game.robot1.endgame.circuit">No</span>
+                        </p>
+                        <p>&emsp;Robot 1 parked in terminal:
+                            <span *ngIf="game.robot1.endgame.parkedInTerminal">Yes</span>
+                            <span *ngIf="!game.robot1.endgame.parkedInTerminal">No</span>
+                        </p>
+                        <p>&emsp;Robot 2 parked in terminal:
+                            <span *ngIf="game.robot2.endgame.parkedInTerminal">Yes</span>
+                            <span *ngIf="!game.robot2.endgame.parkedInTerminal">No</span>
+                        </p>
+                        <p>&emsp;Junctions owned by:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone: {{game.robot1.endgame.junctionsOwnedByCone}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon: {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
+                        <p>Penalties: {{-getPenaltyPoints(game)}} points</p>
+                        <p>&emsp;Minor: {{game.minors}}</p>
+                        <p>&emsp;Major: {{game.majors}}</p>
+                    </div>
+                    <div *ngIf="game.isRemote">
+                        <p>Autonomous: {{getAutoPoints(game)}} points</p>
+                        <p>&emsp;Parked:
+                            <span *ngIf="game.robot1.auto.parked==0">No</span>
+                            <span *ngIf="game.robot1.auto.parked==2">Substation</span>
+                            <span *ngIf="game.robot1.auto.parked==2.5">Terminal</span>
+                            <span *ngIf="game.robot1.auto.parked==10">Signal zone, no bonus</span>
+                            <span *ngIf="game.robot1.auto.parked==20">Signal zone, sleeve bonus</span>
+                        </p>
+                        <p>&emsp;Cones scored:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.auto.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.auto.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.auto.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.auto.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.auto.conesInHigh}}</p>
+                        <p>Teleop: {{getTeleopPoints(game)}} points</p>
+                        <p>&emsp;Cones scored:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.teleop.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.teleop.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.teleop.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.teleop.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.teleop.conesInHigh}}</p>
+                        <p>Endgame: {{getEndgamePoints(game)}} points</p>
+                        <p>&emsp;Circuit completed: 
+                            <span *ngIf="game.robot1.endgame.circuit">Yes</span>
+                            <span *ngIf="!game.robot1.endgame.circuit">No</span>
+                        </p>
+                        <p>&emsp;Parked in terminal:
+                            <span *ngIf="game.robot1.endgame.parkedInTerminal">Yes</span>
+                            <span *ngIf="!game.robot1.endgame.parkedInTerminal">No</span>
+                        </p>
+                        <p>&emsp;Junctions owned by:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone: {{game.robot1.endgame.junctionsOwnedByCone}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon: {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
+                        <p>Penalties: {{-getPenaltyPoints(game)}} points</p>
+                        <p>&emsp;Minor: {{game.minors}}</p>
+                        <p>&emsp;Major: {{game.majors}}</p>
+                    </div>
+                </mat-expansion-panel>
+            </div>
         </div>
     </div>
 </ion-content>

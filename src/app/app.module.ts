@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatDividerModule} from '@angular/material/divider';
     AppRoutingModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule
   ],
   providers: [
   ],
