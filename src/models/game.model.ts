@@ -6,4 +6,8 @@ export interface GameModel {
     minors: number;
     majors: number;
     isRemote: boolean;
+    name: String;
+    description: String;
+    date: Date;
+    isFavourite: boolean;
 }

@@ -14,6 +14,10 @@ export class RemotePageComponent implements OnInit {
     isRemote: true,
     minors: 0,
     majors: 0,
+    name: "",
+    description: "",
+    isFavourite: false,
+    date: new Date(),
     robot1 : {
       auto:{
         conesInTerminal:0,
@@ -204,6 +208,7 @@ export class RemotePageComponent implements OnInit {
     this.saveService.get("games")?.then(
       (response) => {
         let games: GameModel[] = response;
+        this.game.date=new Date();
         if (games != null) {
           games.unshift(this.game);
         }
@@ -220,7 +225,11 @@ export class RemotePageComponent implements OnInit {
     this.game = {
       isRemote: true,
       minors: 0,
-      majors: 0,
+      majors: 0,    
+      name: "",
+      description: "",
+      isFavourite: false,
+      date: new Date(),
       robot1 : {
         auto:{
           conesInTerminal:0,

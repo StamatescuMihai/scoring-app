@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { GameModel } from 'src/models/game.model';
 import { CalculateService } from 'src/services/calculate.service';
+import { FormatDateService } from 'src/services/format-date.service';
 import { StorageService } from 'src/services/storage.service';
 
 @Component({
@@ -11,8 +13,9 @@ import { StorageService } from 'src/services/storage.service';
 export class HistoryPageComponent implements OnInit {
 
   games: GameModel[]=[];
+  firstTime:number=0;
 
-  constructor(private saveService: StorageService, public calcService:CalculateService) {
+  constructor(private saveService: StorageService, public calcService:CalculateService, public dateFormatter:FormatDateService,  private _snackBar:MatSnackBar, private zone:NgZone) {
     this.onGet();
   }
 
@@ -21,8 +24,18 @@ export class HistoryPageComponent implements OnInit {
   }
 
   async onStorageClear(){
-    await this.saveService.clear();
-    this.games = await this.saveService.get("games");
+    if (Date.now()-this.firstTime<3000){
+      await this.saveService.clear();
+      this.games = await this.saveService.get("games");
+    }
+    else{
+    this.firstTime=Date.now();
+      this.zone.run(()=>{
+        this._snackBar.openFromComponent(SnackBarClearComponent, {
+          duration: 3000,
+        });
+      })
+    }
   }
 
   getAutoPoints(game:GameModel):number{
@@ -45,3 +58,20 @@ export class HistoryPageComponent implements OnInit {
   }
 
 }
+
+@Component({
+  selector: 'snack-bar-component-example-snack',
+  template: `
+  <span>
+    Press again to clear history
+  </span>`,
+  styles: [
+    `
+    .mat-simple-snackbar span {
+      margin: auto;
+      text-align: center;
+    }
+  `,
+  ],
+})
+export class SnackBarClearComponent {}

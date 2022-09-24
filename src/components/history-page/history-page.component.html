@@ -1,7 +1,7 @@
 <ion-content>
     <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
     <mat-toolbar class="history-toolbar">
-        <b> <u>Game History</u> </b> 
+        <b> Game History </b> 
      </mat-toolbar>
      <button routerLink="/home" mat-icon-button class="home">
           <mat-icon>home</mat-icon>
@@ -18,6 +18,9 @@
                             Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <mat-divider></mat-divider>
+                    <p>Played {{this.dateFormatter.toString(game.date)}}</p>
+                    <br>
                     <div *ngIf="!game.isRemote">
                         <p>Autonomous: {{getAutoPoints(game)}} points</p>
                         <p>&emsp;Robot 1 parked:
@@ -105,6 +108,7 @@
                         <p>&emsp;Minor: {{game.minors}}</p>
                         <p>&emsp;Major: {{game.majors}}</p>
                     </div>
+                    <p>{{game.description}}</p>
                 </mat-expansion-panel>
             </div>
         </div>
