@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDialogModule,
     MatSnackBarModule,
     MatDividerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatInputModule
   ],
   providers: [
   ],

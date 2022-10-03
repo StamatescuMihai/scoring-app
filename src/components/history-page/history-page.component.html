@@ -1,27 +1,86 @@
 <ion-content>
-    <img class="centered" src="../assets/images/lightning.png" alt="lighting" style="position: fixed; opacity: 35%; height:50%">
+    <img class="centered" src="../assets/images/lightning.png" alt="lighting"
+        style="position: fixed; opacity: 35%; height:50%">
     <mat-toolbar class="history-toolbar">
-        <b> Game History </b> 
-     </mat-toolbar>
-     <button routerLink="/home" mat-icon-button class="home">
-          <mat-icon>home</mat-icon>
-     </button>
-     <button mat-icon-button class="clear" (click)="onStorageClear()">
-        <mat-icon>clear</mat-icon>
+        <b> Game History </b>
+    </mat-toolbar>
+    <button routerLink="/home" mat-icon-button class="home">
+        <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button class="clear" (click)="onStorageClear()">
+        <mat-icon>delete_forever</mat-icon>
     </button>
     <div style="position:relative; top: 12vh;">
         <div *ngFor="let game of games; let i=index;">
             <div>
                 <mat-expansion-panel class="game">
                     <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) : {{this.calcService.total(game)}} points
+                        <mat-panel-title *ngIf="this.games[i].name.length==0">
+                            Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) :
+                            {{this.calcService.total(game)}} points
+                        </mat-panel-title>
+                        <mat-panel-title *ngIf="this.games[i].name.length!=0">
+                            {{this.games[i].name}} ({{game.isRemote?"Remote":"Traditional"}}) :
+                            {{this.calcService.total(game)}} points
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-divider></mat-divider>
-                    <p>Played {{this.dateFormatter.toString(game.date)}}</p>
+                    <div fxLayout="row" fxLayoutAlign="space-around center" >
+                        <p>Played {{this.dateFormatter.toString(game.date)}}</p>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="space-around center">
+                        <span>
+                            <button mat-icon-button (click)="onDelete(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </span>
+                        <span>
+                            <button mat-icon-button (click)="onNameChange(i)">
+                                <mat-icon>border_color</mat-icon>
+                            </button>
+                        </span>
+                        <span>
+                            <button mat-icon-button (click)="onDescriptionChange(i)">
+                                <mat-icon>note_add</mat-icon>
+                            </button>
+                        </span>
+                        <span>
+                            <button mat-icon-button *ngIf="game.isFavourite" (click)="onFavorite(false, i)">
+                                <mat-icon>favorite</mat-icon>
+                            </button>
+                            <button mat-icon-button *ngIf="!game.isFavourite" (click)="onFavorite(true, i)">
+                                <mat-icon>favorite_border</mat-icon>
+                            </button>
+                        </span>
+                    </div>
+                    <div *ngIf="i==this.currentIndexNameChange" fxLayout="row" fxLayoutAlign="space-around center">
+                        <div>
+                            <mat-form-field appearance="fill" style="width: 67vw;">
+                                <mat-label>Game name</mat-label>
+                                <input (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexNameChange].name" matInput>
+                            </mat-form-field>
+                        </div>
+                        <div style="transform: translate(0, -1.5vh);">
+                            <button mat-icon-button  (click)="onInputClose()">
+                                <mat-icon>unfold_less</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="i==this.currentIndexDescChange" fxLayout="row" fxLayoutAlign="space-around center">
+                        <div>
+                            <mat-form-field appearance="fill" style="width: 67vw;">
+                                <mat-label>Game description</mat-label>
+                                <textarea style="height: 13vh" (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexDescChange].description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div style="transform: translate(0, -1.5vh);">
+                            <button mat-icon-button  (click)="onInputDescClose()">
+                                <mat-icon>unfold_less</mat-icon>
+                            </button>
+                        </div>
+                    </div>
                     <br>
-                    <div *ngIf="!game.isRemote">
+                    <div *ngIf="!game.isRemote" style="margin-left: 5vw;">
                         <p>Autonomous: {{getAutoPoints(game)}} points</p>
                         <p>&emsp;Robot 1 parked:
                             <span *ngIf="game.robot1.auto.parked==0">No</span>
@@ -38,20 +97,30 @@
                             <span *ngIf="game.robot2.auto.parked==20">Signal zone, sleeve bonus</span>
                         </p>
                         <p>&emsp;Cones scored:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.auto.conesInTerminal}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.auto.conesInGround}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.auto.conesInLow}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.auto.conesInMedium}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.auto.conesInHigh}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal:
+                            {{game.robot1.auto.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction:
+                            {{game.robot1.auto.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction:
+                            {{game.robot1.auto.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction:
+                            {{game.robot1.auto.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction:
+                            {{game.robot1.auto.conesInHigh}}</p>
                         <p>Teleop: {{getTeleopPoints(game)}} points</p>
                         <p>&emsp;Cones scored:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.teleop.conesInTerminal}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.teleop.conesInGround}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.teleop.conesInLow}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.teleop.conesInMedium}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.teleop.conesInHigh}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal:
+                            {{game.robot1.teleop.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction:
+                            {{game.robot1.teleop.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction:
+                            {{game.robot1.teleop.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction:
+                            {{game.robot1.teleop.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction:
+                            {{game.robot1.teleop.conesInHigh}}</p>
                         <p>Endgame: {{getEndgamePoints(game)}} points</p>
-                        <p>&emsp;Circuit completed: 
+                        <p>&emsp;Circuit completed:
                             <span *ngIf="game.robot1.endgame.circuit">Yes</span>
                             <span *ngIf="!game.robot1.endgame.circuit">No</span>
                         </p>
@@ -64,13 +133,15 @@
                             <span *ngIf="!game.robot2.endgame.parkedInTerminal">No</span>
                         </p>
                         <p>&emsp;Junctions owned by:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone: {{game.robot1.endgame.junctionsOwnedByCone}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon: {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone:
+                            {{game.robot1.endgame.junctionsOwnedByCone}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon:
+                            {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
                         <p>Penalties: {{-getPenaltyPoints(game)}} points</p>
                         <p>&emsp;Minor: {{game.minors}}</p>
                         <p>&emsp;Major: {{game.majors}}</p>
                     </div>
-                    <div *ngIf="game.isRemote">
+                    <div *ngIf="game.isRemote" style="margin-left: 5vw;">
                         <p>Autonomous: {{getAutoPoints(game)}} points</p>
                         <p>&emsp;Parked:
                             <span *ngIf="game.robot1.auto.parked==0">No</span>
@@ -80,20 +151,30 @@
                             <span *ngIf="game.robot1.auto.parked==20">Signal zone, sleeve bonus</span>
                         </p>
                         <p>&emsp;Cones scored:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.auto.conesInTerminal}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.auto.conesInGround}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.auto.conesInLow}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.auto.conesInMedium}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.auto.conesInHigh}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal:
+                            {{game.robot1.auto.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction:
+                            {{game.robot1.auto.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction:
+                            {{game.robot1.auto.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction:
+                            {{game.robot1.auto.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction:
+                            {{game.robot1.auto.conesInHigh}}</p>
                         <p>Teleop: {{getTeleopPoints(game)}} points</p>
                         <p>&emsp;Cones scored:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal: {{game.robot1.teleop.conesInTerminal}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction: {{game.robot1.teleop.conesInGround}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction: {{game.robot1.teleop.conesInLow}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction: {{game.robot1.teleop.conesInMedium}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction: {{game.robot1.teleop.conesInHigh}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In terminal:
+                            {{game.robot1.teleop.conesInTerminal}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In ground junction:
+                            {{game.robot1.teleop.conesInGround}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In low junction:
+                            {{game.robot1.teleop.conesInLow}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In medium junction:
+                            {{game.robot1.teleop.conesInMedium}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In high junction:
+                            {{game.robot1.teleop.conesInHigh}}</p>
                         <p>Endgame: {{getEndgamePoints(game)}} points</p>
-                        <p>&emsp;Circuit completed: 
+                        <p>&emsp;Circuit completed:
                             <span *ngIf="game.robot1.endgame.circuit">Yes</span>
                             <span *ngIf="!game.robot1.endgame.circuit">No</span>
                         </p>
@@ -102,13 +183,18 @@
                             <span *ngIf="!game.robot1.endgame.parkedInTerminal">No</span>
                         </p>
                         <p>&emsp;Junctions owned by:</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone: {{game.robot1.endgame.junctionsOwnedByCone}}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon: {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top cone:
+                            {{game.robot1.endgame.junctionsOwnedByCone}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capped beacon:
+                            {{game.robot1.endgame.junctionsOwnedByBeacon}}</p>
                         <p>Penalties: {{-getPenaltyPoints(game)}} points</p>
                         <p>&emsp;Minor: {{game.minors}}</p>
                         <p>&emsp;Major: {{game.majors}}</p>
                     </div>
-                    <p>{{game.description}}</p>
+                    <div style="margin-left: 5vw;" *ngIf="game.description!=''">
+                        <p>Description:</p>
+                        <p style="margin-right: 8vw;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{game.description}}</p>
+                    </div>
                 </mat-expansion-panel>
             </div>
         </div>
