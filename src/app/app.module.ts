@@ -52,7 +52,7 @@ import {MatInputModule} from '@angular/material/input';
     MatSnackBarModule,
     MatDividerModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
   ],

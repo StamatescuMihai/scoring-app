@@ -95,3 +95,13 @@ mat-expansion-panel-header.cdk-touch-focused{
 ::ng-deep .filter input {
     caret-color: white;
 }
+.my-snackbar{
+    margin: 0 !important;
+    position: absolute;
+    top: 50vh;
+    left: 5vw;
+    text-align: center;
+}
+p{
+    font-size: 2vh;
+}

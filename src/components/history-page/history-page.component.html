@@ -16,11 +16,11 @@
                 <mat-expansion-panel class="game">
                     <mat-expansion-panel-header>
                         <mat-panel-title *ngIf="this.games[i].name.length==0">
-                            Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) :
+                            <span *ngIf="game.isFavourite"><mat-icon style="transform: scale(0.75) translate(0,3px);">favorite</mat-icon>&nbsp;</span> Game number {{games.length-i}} ({{game.isRemote?"Remote":"Traditional"}}) :
                             {{this.calcService.total(game)}} points
                         </mat-panel-title>
                         <mat-panel-title *ngIf="this.games[i].name.length!=0">
-                            {{this.games[i].name}} ({{game.isRemote?"Remote":"Traditional"}}) :
+                            <span *ngIf="game.isFavourite"><mat-icon style="transform: scale(0.75) translate(0,3px);">favorite</mat-icon>&nbsp;</span> {{this.games[i].name}} ({{game.isRemote?"Remote":"Traditional"}}) :
                             {{this.calcService.total(game)}} points
                         </mat-panel-title>
                     </mat-expansion-panel-header>
@@ -57,7 +57,7 @@
                         <div>
                             <mat-form-field appearance="fill" style="width: 67vw;">
                                 <mat-label>Game name</mat-label>
-                                <input (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexNameChange].name" matInput>
+                                <input enterkeyhint="go" (keyup.enter)="onInputClose()" (focusin)="focusInput($event)" (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexNameChange].name" matInput>
                             </mat-form-field>
                         </div>
                         <div style="transform: translate(0, -1.5vh);">
@@ -70,7 +70,7 @@
                         <div>
                             <mat-form-field appearance="fill" style="width: 67vw;">
                                 <mat-label>Game description</mat-label>
-                                <textarea style="height: 13vh" (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexDescChange].description" matInput></textarea>
+                                <textarea style="height: 13vh" (focusin)="focusInput($event)"  (focusout)="onNameSave()" [(ngModel)]="this.games[this.currentIndexDescChange].description" matInput></textarea>
                             </mat-form-field>
                         </div>
                         <div style="transform: translate(0, -1.5vh);">

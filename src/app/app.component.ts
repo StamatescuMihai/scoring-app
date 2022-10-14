@@ -34,6 +34,12 @@ export class AppComponent {
       }
     });
     this.fix();
+    setTimeout(function(){
+      let viewheight = window.innerHeight;
+      let viewwidth=window.innerWidth;
+      let viewport=document.querySelector("meta[name=viewport]");
+      viewport?.setAttribute("content", "height="+viewheight+", width="+viewwidth+", initial-scale=1.0");
+    }, 300);
   }
 
   //dumb method that just interacts with storage so it would get initialized when opening app

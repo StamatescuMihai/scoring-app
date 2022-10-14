@@ -4,6 +4,7 @@ import { GameModel } from 'src/models/game.model';
 import { CalculateService } from 'src/services/calculate.service';
 import { FormatDateService } from 'src/services/format-date.service';
 import { StorageService } from 'src/services/storage.service';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'history-page',
@@ -27,11 +28,32 @@ export class HistoryPageComponent implements OnInit {
     this.games = await this.saveService.get("games");
   }
 
+  public focusInput(event:Event):void{
+    let total=0;
+    let container:any=null;
+    const _rec=(obj:any)=>{
+      total+=obj.offsetTop;
+      const par=obj.offsetParent;
+      if(par&&par.localName!='ion-content'){
+        _rec(par);
+      }
+      else{
+        container=par;
+      }
+    };
+    _rec(event.target);
+    setTimeout(()=>{
+      container.scrollToPoint(0, total-300,400);
+    }, 50);
+    
+  }
+
   async onDelete(index: number){
     if(this.games[index].isFavourite){
       this.zone.run(()=>{
         this._snackBar.openFromComponent(SnackBarCancelDeleteComponent, {
           duration: 3000,
+          panelClass: ['my-snackbar']
         });
       })
       return;
@@ -46,6 +68,7 @@ export class HistoryPageComponent implements OnInit {
       this.zone.run(()=>{
         this._snackBar.openFromComponent(SnackBarDeleteMatchComponent, {
           duration: 3000,
+          panelClass: ['my-snackbar'],
         });
       })
     }
@@ -62,10 +85,10 @@ export class HistoryPageComponent implements OnInit {
     this.saveService.set("games", this.games);
   }
   async onInputClose(){
+    Keyboard.hide();
     this.onNameSave();
     this.currentIndexNameChange=-1;
   }
-
   async onInputDescClose(){
     this.onNameSave();
     this.currentIndexDescChange=-1;
@@ -96,10 +119,11 @@ export class HistoryPageComponent implements OnInit {
       this.saveService.set("games", this.games);
     }
     else{
-    this.firstTimeClear=Date.now();
+      this.firstTimeClear=Date.now();
       this.zone.run(()=>{
         this._snackBar.openFromComponent(SnackBarClearComponent, {
           duration: 3000,
+          panelClass: ['my-snackbar']
         });
       })
     }
