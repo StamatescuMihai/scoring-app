@@ -11,8 +11,16 @@
         <mat-icon>delete_forever</mat-icon>
     </button>
     <div style="position:relative; top: 12vh;">
+        <div fxLayout="column" fxLayoutAlign="space-around center" style="width: 100vw;">
+            <div><p>Filters:</p></div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div style="margin-right: 2.5vw; margin-left: 2.5vw;"><p>Traditional&nbsp;&nbsp;<mat-checkbox [(ngModel)]="onlyTraditional" (click)="checkRemoteTrad(1)"></mat-checkbox></p></div>
+                <div style="margin-right: 2.5vw; margin-left: 2.5vw;"><p>Remote&nbsp;&nbsp;<mat-checkbox [(ngModel)]="onlyRemote" (click)="checkRemoteTrad(2)"></mat-checkbox></p></div>
+                <div style="margin-right: 2.5vw; margin-left: 2.5vw;"><p>Favorite&nbsp;&nbsp;<mat-checkbox [(ngModel)]="onlyFavorite"></mat-checkbox></p></div>
+            </div>
+        </div>
         <div *ngFor="let game of games; let i=index;">
-            <div>
+            <div *ngIf="((onlyFavorite&&game.isFavourite)||(!onlyFavorite))&&((onlyTraditional&&!game.isRemote)||(onlyRemote&&game.isRemote)||(!onlyTraditional&&!onlyRemote))">
                 <mat-expansion-panel class="game">
                     <mat-expansion-panel-header>
                         <mat-panel-title *ngIf="this.games[i].name.length==0">

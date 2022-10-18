@@ -105,3 +105,19 @@ mat-expansion-panel-header.cdk-touch-focused{
 p{
     font-size: 2vh;
 }
+
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+    background-color: #92D50B !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: rgb(100, 145, 10) !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(100, 145, 10) !important;
+}
+
+::ng-deep .mat-checkbox-frame{
+    border-color: white;
+}

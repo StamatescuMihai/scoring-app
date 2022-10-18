@@ -19,6 +19,10 @@ export class HistoryPageComponent implements OnInit {
   lastIndex:number=0;
   public currentIndexNameChange:number=-1;
   public currentIndexDescChange:number=-1;
+  public onlyTraditional:boolean=false;
+  public onlyRemote:boolean=false;
+  public onlyFavorite:boolean=false;
+
 
   constructor(private saveService: StorageService, public calcService:CalculateService, public dateFormatter:FormatDateService,  private _snackBar:MatSnackBar, private zone:NgZone) {
     this.onGet();
@@ -44,6 +48,17 @@ export class HistoryPageComponent implements OnInit {
     _rec(event.target);
     setTimeout(()=>{
       container.scrollToPoint(0, total-300,400);
+    }, 50);
+  }
+
+  checkRemoteTrad(case_: number){
+    setTimeout(()=>{
+      if (case_== 2 && this.onlyRemote&&this.onlyTraditional){
+        this.onlyTraditional=false;
+      }
+      if (case_== 1 && this.onlyRemote&&this.onlyTraditional){
+        this.onlyRemote=false;
+      }
     }, 50);
     
   }
